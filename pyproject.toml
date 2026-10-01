@@ -1,0 +1,67 @@
+[project]
+authors = [{ email = "contact@linkup.so", name = "Linkup" }]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+description = "Linkup web search and fetch tools for Strands Agents"
+keywords = ["agents", "ai", "linkup", "search", "strands", "tool", "web-search"]
+license = "MIT"
+name = "strands-linkup"
+readme = "README.md"
+requires-python = ">=3.10"
+version = "0.1.0"
+
+dependencies = ["linkup-sdk>=0.23.0", "strands-agents>=1.0.0"]
+
+[dependency-groups]
+dev = ["mypy", "prek", "pytest", "pytest-asyncio", "ruff"]
+
+[project.urls]
+Documentation = "https://github.com/LinkupPlatform/strands-linkup#readme"
+Homepage = "https://www.linkup.so"
+Repository = "https://github.com/LinkupPlatform/strands-linkup"
+Tracker = "https://github.com/LinkupPlatform/strands-linkup/issues"
+
+[tool.mypy]
+exclude = ['^tests/', '^examples/']
+strict = true
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+  "B", # flake8-bugbear
+  "E", # pycodestyle
+  "F", # pyflakes
+  "I", # isort
+  "S", # flake8-bandit
+]
+
+[tool.ruff.lint.extend-per-file-ignores]
+"tests/**/test_*.py" = ["S101"] # Use of assert detected
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/strands_linkup"]
+
+[tool.uv]
+exclude-newer = "2 weeks" # Reduce risks of supply chain attacks
